@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Ayuda</title>
+</head>
+
+<body>
+	<h1>Ayuda de SimpleGames</h1>
+	<section>
+	
+		<article>
+				<h2 id="jugar">Jugar</h2>
+                <p>En esta versión de la aplicación, no hay aún juego, pero se mostrará el formulario que simula el evento que ocurrirá
+				al acabar la partida después de elegir el juego que decide jugar, en esta versión aparece directamente el resultado
+				post-partida, que empezará con un asistente en otra ventana, que te pedirá que introduzca tu nombre de usuario, y
+				el juego que has elegido mediante un menú de elección, después se generará de forma aleatoria simulando los ajustes
+				de la partida junto con el tiempo empleado para su realización y la puntuación. Por último genera un informe
+				pdf donde muestra los datos de la partida junto con la score más alta registrada en el juego seleccionado
+				para que el usuario sepa si ha batido record, y una gráfica de las puntuaciones de otras partidas junto
+				con la puntuación de la última partida para que pueda comparar como ha sido su partida. Además mostrará
+				el pdf por pantalla.</p>
+				<p> Principalmente esta opción del menú te abre una ventana en la que comienza actuando un Wizard,
+				que te pasa por 4 ventanas en las que en la primera página te pregunta por tu nombre y un QComboBox donde eliges
+				el juego que teóricamente has jugado, registras los dos valores en variables, si no se escribe el nombre,
+				no podrá pasar a la siguiente página del wizard, mínimo tendrá que tener algo de texto, y seguidamente se genera en las
+				siguientes ventanas una dificultad aleatoria entre 3 posibilidades (Fácil, Normal y Difícil), la puntuación
+				se establece aleatoria entre 0 y 300, y el tiempo se establece de forma aleatoria siendo tratados las horas,
+				minutos y segundos por variables separadas, para ser añadidos a un formato string a continuación.
+				Cuando se pulsa el botón final tras haber pasado por todas las páginas del asistente, acabará llamando a la
+				función generate(), que comienza obteniendo la variable de la puntuación máxima del mismo juego elegido en el 
+				wizard registrada en la base de datos de la aplicación para ser tratada más adelante, realiza un next() para registrar
+				dicha cifra. A continuación se forma el contenido que aparecerá en el pdf que se generará, tendrá una plantilla llamada
+				template.pdf guardada en el mismo directorio, tendrá nombre, dificultad, puntuación, tiempo, juego y puntuación máxima
+				del juego, todas ya han sido definidas anteriormente, y se registrará sus textos en el data que será tratado. Ahora se
+				crea una consulta para guardar las 3 primeras puntuaciones registradas en la base de datos, en general, a continuación
+				se comprobará si las 3 puntuaciones son nulas o no, ya que en la base de datos podría no haber datos o tantos datos,
+				en caso de que fuesen nulos se modificarían las variables para que valiesen 0, y se genera una gráfica con dichos
+				valores, además de la última puntuación que has registrado, se exporta la imágen de la gráfica y se establecen
+				sus parámetros, y por último se genera todos estos elementos en el pdf con la salida de "result.pdf", siendo establecidas
+				sus coordenadas, también se mostrará en pantalla a un resultado web, que en este caso sería el pdf recién generado, para
+				poder visualizarlo. Mostrará un mensaje de información de que el pdf se generó correctamente.
+				Hay definidos las acciones de si clickeas el botón 1 ("jugar"), aparecerá todo el wizard que encamina a todo lo mostrado.
+				
+		</article>
+		
+	</section>
+
+    <section>
+	
+		<article>
+				<h2 id="estadisticas">Estadísticas</h2>
+                <p>Muestra la vista de la base de datos que guarda las estadísticas locales, y se podrán añadir, modificar
+				y eliminar manualmente.</p>
+				<p>
+				Al pulsar el botón Estadísticas llamará al método que se encarga de cambiar la visibilidad a una ventana nueva que será
+				la ventana que administra directamente con la base de datos llamada "chinook.sqlite", esta ventana se crea a partir de la
+				clase AnotherWindow, que es la ventana que conlleva, se genera los campos que habían sido generados en el wizard,
+				estos se incluyen a la interfaz visual, y aparecerán 3 botones para añadir, modificar y eliminar, que cada uno llama
+				a una función distinta, que son seleccion, modificar, nueva y borrar.
+				</p>
+                <h3 id="seleccion">Seleccion</h3>
+                <p>
+				Nos quedamos con la fila del primer índice (solo se puede seleccionar una fila). Obtenemos los valores nombre,
+				dificultad, score, tiempo y juego del modelo en esa fila. Modificamos los campos del formulario para establecer
+				los valores y si no hay selección, ponemos la fila inicial a un valor que indica que no está seleccionada ninguna
+				fila
+				</p>
+				<h3 id="modificar">Modificar</h3>
+                <p>
+				Si la fila seleccionada es válida, se obtienen los valores de los campos de formulario, se actualizan los campos
+				en el módelo y se ejecutan los cambios en el modelo.
+				</p>
+				<h3 id="nueva">Nueva</h3>
+                <p>
+				Guardamos en la variable nuevaFila el número de filas del modelo, insertamos una nueva fila en el modelo en la posición
+				de ese valor, seleccionamos la fila nueva y ponemos en blanco el texto de la dificultad, se establece en blanco el resto
+				de campos.
+				</p>
+				<h3 id="borrar">Borrar</h3>
+                <p>
+				Si es una fila válida la seleccionada, se borra la fila en el modelo, se actualiza la tabla, y se pone la fila actual a -1.
+				Por último se resetea los valores en los campos del formulario.
+				</p>
+		</article>
+		
+	</section>
+
+    <section>
+	
+		<article>
+				<h2 id="salir">Salir</h2>
+                <p>Es un botón que cierra la aplicación.</p>
+                <p>Al pulsar el botón llamará una función que cerrará la aplicación.</p>
+		</article>
+		
+	</section>
+
+</body>
+
+</html>

@@ -1,4 +1,5 @@
 from datetime import datetime
+from pathlib import Path
 import random
 import sys, os
 import textwrap
@@ -123,13 +124,25 @@ class AnotherWindow(QMainWindow, Ui_MainWindow):
             self.scoreText.setText("")
             self.tiempoText.setText("")
             self.juegoText.setText("")
+class AnotherWindow2(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        
+        self.setWindowTitle("Informe")
+        self.web = QWebEngineView()
+        self.web.settings().setAttribute(QWebEngineSettings.PluginsEnabled, True)
+        ruta = Path("result.pdf")
+        ruta.absolute().as_uri()
+        self.web.load(QUrl(ruta.absolute().as_uri()))
+        self.setCentralWidget(self.web)
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
         self.setWindowTitle("App SimpGam")
-        contenedor= QWidget()
-        layout = QVBoxLayout()
+        self.contenedor= QWidget()
+        self.layout = QVBoxLayout()
         self.button1 = QPushButton("Jugar")
         self.button2 = QPushButton("Estadísticas")
         self.button3 = QPushButton("Salir")
@@ -143,12 +156,15 @@ class MainWindow(QMainWindow):
         self.button2.clicked.connect(self.button2_clicked)
         self.button3.clicked.connect(self.button3_clicked)
         self.w = AnotherWindow()
-
-        layout.addWidget(self.button1)
-        layout.addWidget(self.button2)
-        layout.addWidget(self.button3)
-        contenedor.setLayout(layout)
-        self.setCentralWidget(contenedor)
+        self.w2 = AnotherWindow2()
+        self.button4 = QPushButton()
+        self.button4.setText("Salir")
+        self.button4.clicked.connect(self.button4_clicked)
+        self.layout.addWidget(self.button1)
+        self.layout.addWidget(self.button2)
+        self.layout.addWidget(self.button3)
+        self.contenedor.setLayout(self.layout)
+        self.setCentralWidget(self.contenedor)
 
         
         self.wizard = QWizard()
@@ -279,15 +295,24 @@ class MainWindow(QMainWindow):
 
 
         canvas.save()
-
+        layout2 = QVBoxLayout()
+        
         self.web = QWebEngineView()
+        
+        plt.hide()
         self.web.settings().setAttribute(QWebEngineSettings.PluginsEnabled, True)
-        ruta = os.getcwd()
-        rutaConPDF = ruta+"/result.pdf"
-        self.web.load(QUrl("file://"+rutaConPDF))
-        self.setCentralWidget(self.web)
-
+        
+        #rutaConPDF = Path("template.pdf")
+        #self.web.load(QUrl(rutaConPDF.absolute().as_uri()))
+        #layout2.addWidget(self.web)
+        #layout2.addWidget(self.button4)
+        #contenedor2= QWidget()
+        #contenedor2.setLayout(layout2)
+        #self.setCentralWidget(contenedor2)
+        
         QMessageBox.information(self, "Finalizado", "Se ha generado el PDF")
+        self.w2.show()
+        
     def button_clicked(self, s):
         self.wizard.show()
     def button2_clicked(self, checked):
@@ -299,6 +324,8 @@ class MainWindow(QMainWindow):
             self.w.show()
     def button3_clicked(self, s):
         self.close()
+    def button4_clicked(self,s):
+        self.setCentralWidget(self.contenedor)
 app = QApplication(sys.argv)
 
 window = MainWindow()

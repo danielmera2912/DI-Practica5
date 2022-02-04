@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QtHelpProject version="1.0">
+    <namespace>SimpleGames</namespace>
+    <virtualFolder>doc</virtualFolder>
+    <customFilter name="My Application 1.0">
+        <filterAttribute>Ayuda</filterAttribute>
+        <filterAttribute>1.0</filterAttribute>
+    </customFilter>
+    <filterSection>
+        <filterAttribute>Ayuda</filterAttribute>
+        <filterAttribute>1.0</filterAttribute>
+        <toc>
+            <section title="My Application Manual" ref="index.html">
+                <section title="jugar" ref="index.html#jugar"/>
+                <section title="estadisticas" ref="index.html#estadisticas"/>
+                <section title="salir" ref="index.html#salir"/>
+            </section>
+        </toc>
+        <keywords>
+            <keyword name="seleccion" ref="index.html#seleccion"/>
+            <keyword name="modificar" ref="index.html#modificar"/>
+            <keyword name="nueva" ref="index.html#nueva"/>
+			<keyword name="borrar" ref="index.html#borrar"/>
+        </keywords>
+        <files>
+            <file>*.html</file>
+        </files>
+    </filterSection>
+</QtHelpProject>
