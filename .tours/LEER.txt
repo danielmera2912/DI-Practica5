@@ -1,1 +1,0 @@
-Por problemas de subir al github, esta carpeta deberá de ser modificada para llamarse: ".tours" una vez descargado.
