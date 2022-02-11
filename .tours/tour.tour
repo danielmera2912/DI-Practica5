@@ -1,0 +1,56 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "tour",
+  "steps": [
+    {
+      "file": "trabajo.py",
+      "description": "Para ayudar en esta aplicación, se puede mejorar el diseño del menú principal, expandir las posibilidades que puede realizar el usuario con la base de datos que almacena la aplicación, al igual que tener varios formatos de pdf en los que imprimir los datos de la partida, al igual que poder controlar los datos de diversas formas o imprimir partidas anteriores, dentro del repositorio, se podrá encontrar la carpeta “.tours” que llevará por un tour sobre la aplicación para ayudar con el uso de las herramientas para entender mejor la aplicación, para poder recibir aportes de mejora a base de esto.",
+      "line": 1
+    },
+    {
+      "file": "trabajo.py",
+      "description": "Se configura la base de datos con la aplicación",
+      "line": 25
+    },
+    {
+      "file": "trabajo.py",
+      "description": "Configura el diseño y los botones del menú principal, vincula dichos botones con las funciones que llamará, además se instanciará la clase AnotherWindow y AnotherWindow2, que será tratada más adelante",
+      "line": 146
+    },
+    {
+      "file": "trabajo.py",
+      "description": "Configura el asistente por el que tendrá que pasar el usuario, con sus ventanas, recopila la información que el usuario añade guardandolas en variables, y otras se generarán automáticamente y se mostrarán mediante el asistente, por último llamará a la función que generará el pdf con dichos datos.",
+      "line": 178,
+      "selection": {
+        "start": {
+          "line": 178,
+          "character": 14
+        },
+        "end": {
+          "line": 178,
+          "character": 20
+        }
+      }
+    },
+    {
+      "file": "trabajo.py",
+      "description": "Una vez que el paso anterior llama a la función Generate, se guardarán los datos registrados anteriormente en variables, además guardará en una consulta la puntuación máxima registrada en la base de datos respecto el juego que ha seleccionado el usuario desde el asistente en el paso anterior.",
+      "line": 242
+    },
+    {
+      "file": "trabajo.py",
+      "description": "Para la gráfica que se imprimirá en el pdf, guardará los 3 primeros valores de estadísticas de la base de datos, si no existiesen, guardará 0 y se imprimirá en la gráfica junto con la puntuación actual del usuario.\r\nPor último imprimirá los datos del usuario, junto con la gráfica generada y se incrustrará en la aplicación el pdf mostrado.",
+      "line": 254
+    },
+    {
+      "file": "trabajo.py",
+      "description": "El botón \"Jugar\" al ser pulsado, mostrará la ventana del wizard. El botón \"Estadísticas\" hará visible la instancia de AnotherWindow que fue generada anteriormente, que se encargará de mostrar en otra ventana la base de datos, y el botón \"Salir\" provocará el fin de la aplicación.",
+      "line": 324
+    },
+    {
+      "file": "trabajo.py",
+      "description": "Almacena toda la información de la base de datos, y permitirá la modificación de esta mediante las funciones de selección, que permite en las cajas de texto correspondiente a la base de datos, para poder modificar dicha información, y al pulsar en modificar, sobrescribirá los datos actuales en la columna seleccionada, esto se encarga de hacerlo la función modificar, por último se podrá añadir que añadirá una nueva columna con valores vacíos, que podrán ser rellenados mediante la función modificar, y la función eliminar se encarga de eliminar todos los valores de la base de datos de la columna seleccionada, y todas estas funciones además de modificar internamente la base de datos, se encargará de refrescar la vista.",
+      "line": 35
+    }
+  ]
+}
