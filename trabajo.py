@@ -5,6 +5,7 @@ import sys, os
 import textwrap
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QApplication, QComboBox, QMainWindow, QPushButton, QWizard, QWizardPage, QLineEdit, QHBoxLayout, QLabel, QWidget, QAbstractItemView, QVBoxLayout, QMessageBox, QFormLayout, QTextEdit, QSpinBox
+from Qt import QtGui
 from reportlab.pdfgen.canvas import Canvas
 from pdfrw import PdfReader
 from pdfrw.buildxobj import pagexobj
@@ -13,18 +14,25 @@ from PySide6.QtCore import QUrl, Qt
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtWebEngineCore import QWebEngineSettings
 from PySide6.QtSql import QSqlDatabase, QSqlQuery, QSqlRelation, QSqlRelationalTableModel
+from componente import componente
 from design import Ui_MainWindow
 import pyqtgraph as pg
 import pyqtgraph.exporters
-
+from PySide6 import QtWidgets, QtGui
 # La aplicación consistiría en pulsar a jugar y se elige el juego que se desea jugar,
 #  saltaría la pantalla del juego y al acabar, salta el asistente para registrar tu puntuación en un informe
 # en estadísticas se guarda las estadísticas locales en una base de datos, y el botón salir sale
-
+basedir = os.path.dirname(__file__)
 db = QSqlDatabase("QSQLITE")
 db.setDatabaseName("chinook.sqlite")
 
 db.open()
+try:
+    from ctypes import windll  # Only exists on Windows.
+    myappid = 'mycompany.myproduct.subproduct.version'
+    windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+except ImportError:
+    pass
 class AnotherWindow(QMainWindow, Ui_MainWindow):
 
     def __init__(self):
@@ -135,26 +143,32 @@ class AnotherWindow2(QMainWindow):
         ruta.absolute().as_uri()
         self.web.load(QUrl(ruta.absolute().as_uri()))
         self.setCentralWidget(self.web)
-
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-
+        self.setWindowIcon(QtGui.QIcon(os.path.join(basedir, 'sg.ico')))
+        #app.setWindowIcon(QtGui.QIcon('sg.ico'))
         self.setWindowTitle("App SimpGam")
         self.contenedor= QWidget()
         self.layout = QVBoxLayout()
         self.button1 = QPushButton("Jugar")
         self.button2 = QPushButton("Estadísticas")
         self.button3 = QPushButton("Salir")
+        self.button5 = QPushButton("Componente")
+        self.text_label = QLabel()
+        self.text_label.setText("Hello World!")
         self.button1.setStyleSheet("border:7px solid #ff0000")
         self.button2.setStyleSheet("border:7px solid #ff0000")
         self.button3.setStyleSheet("border:7px solid #ff0000")
+        self.button5.setStyleSheet("border:7px solid #ff0000")
         self.button1.setMinimumSize(50,50)
         self.button2.setMinimumSize(50,50)
         self.button3.setMinimumSize(50,50)
+        self.button5.setMinimumSize(50,50)
         self.button1.clicked.connect(self.button_clicked)
         self.button2.clicked.connect(self.button2_clicked)
         self.button3.clicked.connect(self.button3_clicked)
+        self.button5.clicked.connect(self.button5_clicked)
         self.w = AnotherWindow()
         self.w2 = AnotherWindow2()
         self.button4 = QPushButton()
@@ -163,6 +177,7 @@ class MainWindow(QMainWindow):
         self.layout.addWidget(self.button1)
         self.layout.addWidget(self.button2)
         self.layout.addWidget(self.button3)
+        self.layout.addWidget(self.button5)
         self.contenedor.setLayout(self.layout)
         self.setCentralWidget(self.contenedor)
 
@@ -326,9 +341,6 @@ class MainWindow(QMainWindow):
         self.close()
     def button4_clicked(self,s):
         self.setCentralWidget(self.contenedor)
-app = QApplication(sys.argv)
-
-window = MainWindow()
-window.show()
-
-app.exec()
+    def button5_clicked(self,s):
+        mainToggle = componente()
+        self.setCentralWidget(mainToggle)
